@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CraftStore - Loja de Tumblers e Banners Minecraft</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Minecraftia', monospace, Arial, sans-serif;
+      background-color: #1e1e1e;
+      color: #eee;
+    }
+    header {
+      background-color: #333;
+      padding: 1rem;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: bold;
+      border-bottom: 3px solid #4caf50;
+    }
+    nav {
+      background: #2a2a2a;
+      padding: 0.5rem;
+      text-align: center;
+    }
+    nav a {
+      color: #4caf50;
+      margin: 0 1rem;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    section {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+    .product {
+      background: #2a2a2a;
+      border: 2px solid #4caf50;
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .product img {
+      max-width: 300px;
+      border-radius: 8px;
+    }
+    .product button {
+      background: #4caf50;
+      border: none;
+      padding: 0.5rem 1rem;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 4px;
+      margin-top: 0.5rem;
+    }
+    .contact, .chatbox {
+      background: #2a2a2a;
+      border: 2px solid #4caf50;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+    .chatlog {
+      height: 150px;
+      overflow-y: auto;
+      border: 1px solid #4caf50;
+      padding: 0.5rem;
+      background: #111;
+      color: #aaffaa;
+      font-family: monospace;
+      white-space: pre-wrap;
+      margin-bottom: 0.5rem;
+    }
+    .chatinput {
+      width: 100%;
+      padding: 0.5rem;
+      border-radius: 4px;
+      border: none;
+      font-family: monospace;
+    }
+    footer {
+      background: #333;
+      padding: 1rem;
+      text-align: center;
+      border-top: 3px solid #4caf50;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>CraftStore - Tumblers & Banners Minecraft</header>
+
+<nav>
+  <a href="#home">Home</a>
+  <a href="#produtos">Produtos</a>
+  <a href="#contato">Contato</a>
+  <a href="#chat">Chat</a>
+</nav>
+
+<section id="home">
+  <h1>Bem-vindo à CraftStore!</h1>
+  <p>Aqui você encontra Tumblers e Banners personalizados com tema Minecraft para decorar sua vida e seu servidor.</p>
+</section>
+
+<section id="produtos">
+  <h2>Produtos</h2>
+  
+  <div class="product">
+    <h3>Tumblr Minecraft</h3>
+    <img src="https://i.imgur.com/5E3Xv58.png" alt="Tumblr Minecraft">
+    <p>Personalize seu tumblr com o tema Minecraft! Ideal para fãs do jogo.</p>
+    <button onclick="buy('Tumblr Minecraft', 35)">Comprar por R$35,00</button>
+  </div>
+
+  <div class="product">
+    <h3>Banner Minecraft</h3>
+    <img src="https://i.imgur.com/VzU4QEc.png" alt="Banner Minecraft">
+    <p>Banners customizados para decorar seu servidor ou canal com tema Minecraft.</p>
+    <button onclick="buy('Banner Minecraft', 50)">Comprar por R$50,00</button>
+  </div>
+</section>
+
+<section id="contato" class="contact">
+  <h2>Contato</h2>
+  <p>Fale com a gente pelo WhatsApp: <a href="https://wa.me/SEUNUMERO" style="color: #4caf50;">Clique aqui</a></p>
+  <p>Email: contato@craftstore.com</p>
+  <p>Nos siga: <a href="#" style="color: #4caf50;">Instagram</a> | <a href="#" style="color: #4caf50;">Discord</a></p>
+</section>
+
+<section id="chat" class="chatbox">
+  <h2>Chat de Comandos</h2>
+  <div class="chatlog" id="chatlog"></div>
+  <input type="text" id="chatinput" class="chatinput" placeholder="Digite um comando (/ajuda, /preco, /contato)" onkeydown="if(event.key==='Enter') processCommand()">
+</section>
+
+<footer>
+  &copy; 2025 CraftStore - Todos os direitos reservados.
+</footer>
+
+<script>
+  function buy(item, price) {
+    alert(`Você adicionou ${item} ao carrinho. Preço: R$${price},00`);
+  }
+
+  function processCommand() {
+    const input = document.getElementById('chatinput');
+    const chatlog = document.getElementById('chatlog');
+    const command = input.value.trim().toLowerCase();
+
+    if (!command.startsWith('/')) {
+      chatlog.textContent += "\nComando inválido. Use /ajuda.";
+      input.value = '';
+      chatlog.scrollTop = chatlog.scrollHeight;
+      return;
+    }
+
+    switch (command) {
+      case '/ajuda':
+        chatlog.textContent += `\nComandos disponíveis:\n/ajuda - Lista os comandos\n/preco - Mostra preços\n/contato - Informações de contato`;
+        break;
+      case '/preco':
+        chatlog.textContent += `\nPreços:\nTumblr Minecraft - R$35,00\nBanner Minecraft - R$50,00`;
+        break;
+      case '/contato':
+        chatlog.textContent += `\nContato:\nWhatsApp: SEUNUMERO\nEmail: contato@craftstore.com`;
+        break;
+      default:
+        chatlog.textContent += `\nComando não reconhecido. Use /ajuda para listar comandos.`;
+        break;
+    }
+
+    input.value = '';
+    chatlog.scrollTop = chatlog.scrollHeight;
+  }
+</script>
+
+</body>
+</html>
